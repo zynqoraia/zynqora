@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 
 import apiRoutes from "./src/routes/index.js";
+import { errorHandler } from "./src/middleware/error.middleware.js";
 
 const app = express();
 
@@ -54,6 +55,14 @@ app.get("/", (req, res) => {
 */
 
 app.use("/api", apiRoutes);
+
+/*
+|--------------------------------------------------------------------------
+| Middleware de errores
+|--------------------------------------------------------------------------
+*/
+
+app.use(errorHandler);
 
 /*
 |--------------------------------------------------------------------------

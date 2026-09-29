@@ -1,0 +1,107 @@
+.reusable-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: var(--radius-md);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transition-normal),
+        color var(--transition-normal),
+        border-color var(--transition-normal),
+        transform var(--transition-fast),
+        box-shadow var(--transition-normal);
+}
+
+.reusable-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.reusable-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.reusable-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/*
+========================================
+PRIMARY
+========================================
+*/
+
+.reusable-button--primary {
+    background: var(--color-primary);
+    color: #ffffff;
+}
+
+.reusable-button--primary:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+
+    box-shadow: var(--shadow-sm);
+}
+
+/*
+========================================
+SECONDARY
+========================================
+*/
+
+.reusable-button--secondary {
+    background: var(--color-surface);
+
+    color: var(--color-text);
+
+    border: 1px solid var(--color-border);
+}
+
+.reusable-button--secondary:hover:not(:disabled) {
+    background: var(--color-surface-soft);
+
+    border-color: var(--color-primary);
+}
+
+/*
+========================================
+DANGER
+========================================
+*/
+
+.reusable-button--danger {
+    background: var(--color-danger);
+
+    color: #ffffff;
+}
+
+.reusable-button--danger:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+/*
+========================================
+GHOST
+========================================
+*/
+
+.reusable-button--ghost {
+    background: transparent;
+
+    color: var(--color-text-secondary);
+}
+
+.reusable-button--ghost:hover:not(:disabled) {
+    background: var(--color-surface-soft);
+
+    color: var(--color-text);
+}

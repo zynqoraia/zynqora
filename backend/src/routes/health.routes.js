@@ -1,14 +1,11 @@
 import { Router } from "express";
 
+import {
+    healthCheck
+} from "../controllers/health.controller.js";
+
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.json({
-        success: true,
-        application: "Zynqora",
-        message: "Zynqora backend funcionando correctamente",
-        timestamp: new Date().toISOString()
-    });
-});
+router.get("/", healthCheck);
 
 export default router;
