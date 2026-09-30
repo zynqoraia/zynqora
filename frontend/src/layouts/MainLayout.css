@@ -282,3 +282,39 @@ RESPONSIVE
         padding: 20px;
     }
 }
+
+.main-header__login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 36px;
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    background: var(--color-primary);
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.main-header__login:hover {
+    opacity: 0.92;
+
+    transform: translateY(-1px);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.main-header__login:active {
+    transform: translateY(0);
+}

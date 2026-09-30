@@ -1,34 +1,100 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import {
+    NavLink,
+    useNavigate
+} from "react-router-dom";
+
+import {
+    useEffect,
+    useState
+} from "react";
+
+import {
+    supabase
+} from "../config/supabase";
+
+import LogoutButton from "../components/LogoutButton";
 
 import "./MainLayout.css";
 
 function MainLayout({ children }) {
-    const [darkMode, setDarkMode] = useState(() => {
-        const savedTheme =
-            localStorage.getItem("zynqora-theme");
+    const navigate = useNavigate();
 
-        return savedTheme === "dark";
-    });
+    const [darkMode, setDarkMode] =
+        useState(() => {
+            return (
+                localStorage.getItem(
+                    "zynqora-theme"
+                ) === "dark"
+            );
+        });
+
+    const [session, setSession] =
+        useState(null);
 
     useEffect(() => {
-        const theme = darkMode
-            ? "dark"
-            : "light";
-
-        document.documentElement.setAttribute(
-            "data-theme",
-            theme
+        document.documentElement.classList.toggle(
+            "dark",
+            darkMode
         );
 
         localStorage.setItem(
             "zynqora-theme",
-            theme
+            darkMode
+                ? "dark"
+                : "light"
         );
     }, [darkMode]);
 
+    useEffect(() => {
+        let mounted = true;
+
+        const loadSession = async () => {
+            const {
+                data,
+                error
+            } = await supabase.auth.getSession();
+
+            if (error) {
+                console.error(
+                    "Error obteniendo sesión:",
+                    error
+                );
+
+                return;
+            }
+
+            if (mounted) {
+                setSession(data.session);
+            }
+        };
+
+        loadSession();
+
+        const {
+            data: {
+                subscription
+            }
+        } = supabase.auth.onAuthStateChange(
+            (_event, currentSession) => {
+                if (mounted) {
+                    setSession(
+                        currentSession
+                    );
+                }
+            }
+        );
+
+        return () => {
+            mounted = false;
+
+            subscription.unsubscribe();
+        };
+    }, []);
+
     const toggleTheme = () => {
-        setDarkMode((current) => !current);
+        setDarkMode(
+            (current) => !current
+        );
     };
 
     return (
@@ -111,6 +177,17 @@ function MainLayout({ children }) {
 
                         Sistema activo
                     </div>
+
+                    {session ? (
+                        <LogoutButton />
+                    ) : (
+                        <NavLink
+                            to="/login"
+                            className="main-header__login"
+                        >
+                            LOGIN
+                        </NavLink>
+                    )}
 
                 </div>
 

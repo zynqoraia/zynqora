@@ -1,0 +1,36 @@
+.protected-route-loading {
+    min-height: 60vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.protected-route-loading__logo {
+    width: 56px;
+    height: 56px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: var(--color-primary);
+    color: white;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    box-shadow: var(--shadow-md);
+}
+
+.protected-route-loading p {
+    margin-top: 14px;
+
+    color: var(--color-text-secondary);
+
+    font-size: 14px;
+}
